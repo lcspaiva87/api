@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("/subjects")
-public class SubjectController {
+@RequestMapping("/disciplines")
+public class DisciplineController<DisciplineModel> {
     @Autowired
     private IDisciplineRepository disciplineRepository;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity create(@RequestBody DisciplineModel disciplineModel) {
-        var discipline = this.disciplineRepository.findByName(disciplineModel.getName());
+        var discipline = this.disciplineRepository.findByName(disciplineModel.toString());
 
         if(discipline != null) {
             return ResponseEntity.status(400).body("Discipline already exists");
